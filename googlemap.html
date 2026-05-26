@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業概要 ｜ 株式会社SGI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c8903a;
+    --gold-mid: #d4a050;
+    --gold-light: #e8bf7a;
+    --gold-pale: #fdf6ea;
+    --gold-line: #eed9a8;
+    --white: #ffffff;
+    --off-white: #fdfaf4;
+    --gray-bg: #faf7f0;
+    --gray-line: #ede5d0;
+    --gray-mid: #b8a888;
+    --text-dark: #1a1510;
+    --text-mid: #3a3020;
+    --text-light: #7a6a50;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    line-height: 1.8;
+  }
+
+  /* ── NAV ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 2px 24px rgba(200,144,58,0.08);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    color: var(--gold);
+    background: var(--gold-pale);
+    letter-spacing: 0.03em;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 2.2rem;
+    transition: color 0.25s;
+  }
+  nav a:hover, nav a.active { color: var(--gold); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding-top: 68px;
+    background: linear-gradient(150deg, #fffdf7 0%, #fdf8ee 50%, #faf5e8 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .page-hero-orb-1 { width: 400px; height: 400px; background: rgba(200,144,58,0.12); top: -80px; right: -60px; }
+  .page-hero-orb-2 { width: 250px; height: 250px; background: rgba(232,191,122,0.1); bottom: -40px; left: 8%; }
+
+  .page-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(200,144,58,0.04) 0px, rgba(200,144,58,0.04) 1px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(90deg, rgba(200,144,58,0.04) 0px, rgba(200,144,58,0.04) 1px, transparent 1px, transparent 80px);
+  }
+
+  .page-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .breadcrumb {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--gray-mid);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+
+  .page-hero-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .page-hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--text-dark);
+    letter-spacing: 0.12em;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+
+  .page-hero-divider {
+    width: 50px; height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .side-nav { position: sticky; top: 88px; }
+
+  .side-nav-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--gray-mid);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--gold-line);
+  }
+
+  .side-nav a {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.55rem 0 0.55rem 0.9rem;
+    border-left: 2px solid transparent;
+    transition: all 0.25s;
+  }
+
+  .side-nav a:hover, .side-nav a.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    padding-left: 1.2rem;
+  }
+
+  /* ── CONTENT BLOCKS ── */
+  .content-area { min-width: 0; }
+
+  .content-section {
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .content-section.visible { opacity: 1; transform: translateY(0); }
+
+  .content-section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gold-line);
+  }
+
+  .content-section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.28em;
+    margin-bottom: 0.3rem;
+  }
+
+  .content-section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    letter-spacing: 0.1em;
+  }
+
+  .content-section-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--gray-mid);
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  /* ── OVERVIEW TABLE ── */
+  .overview-table { width: 100%; border-collapse: collapse; }
+
+  .overview-table tr { border-bottom: 1px solid var(--gold-line); transition: background 0.2s; }
+  .overview-table tr:first-child { border-top: 1px solid var(--gold-line); }
+  .overview-table tr:hover { background: var(--gold-pale); }
+
+  .overview-table th {
+    width: 180px;
+    padding: 1.1rem 1.5rem 1.1rem 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .overview-table td {
+    padding: 1.1rem 0;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+    vertical-align: top;
+  }
+
+  .overview-table td a { color: var(--gold); text-decoration: none; }
+
+  /* ── MESSAGE ── */
+  .message-wrap {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .message-text p {
+    font-size: 0.88rem;
+    line-height: 2.1;
+    color: var(--text-mid);
+    margin-bottom: 1.3rem;
+    text-align: justify;
+  }
+
+  .message-sig {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gold-line);
+  }
+
+  .message-sig-title { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gray-mid); margin-bottom: 0.4rem; }
+
+  .message-sig-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    letter-spacing: 0.1em;
+  }
+
+  .message-photo { position: relative; }
+
+  .message-photo::before {
+    content: '';
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 100%; height: 100%;
+    border: 1.5px solid var(--gold-line);
+    border-radius: 2px;
+    z-index: 0;
+  }
+
+  .photo-placeholder {
+    position: relative; z-index: 1;
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--gold-pale) 0%, #faefd8 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.8rem; border-radius: 2px;
+  }
+
+  .photo-placeholder svg { opacity: 0.3; }
+
+  .photo-placeholder-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--gold); font-style: italic;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .philosophy-card {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-line);
+    border-top: 3px solid var(--gold);
+    padding: 2rem 1.5rem;
+    border-radius: 0 0 2px 2px;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .philosophy-card:hover {
+    box-shadow: 0 8px 30px rgba(200,144,58,0.12);
+    transform: translateY(-3px);
+  }
+
+  .philosophy-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: rgba(200,144,58,0.18);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+
+  .philosophy-card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+  }
+
+  .philosophy-card-body { font-size: 0.8rem; color: var(--text-mid); line-height: 1.9; }
+
+  /* ── HISTORY ── */
+  .history-list { list-style: none; }
+
+  .history-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--gold-line);
+    align-items: baseline;
+  }
+  .history-item:first-child { border-top: 1px solid var(--gold-line); }
+
+  .history-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400;
+    color: var(--gold); letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .history-desc { font-size: 0.84rem; color: var(--text-mid); line-height: 1.85; }
+
+  /* ── ACCESS ── */
+  .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+  .access-info dt {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    color: var(--gold); font-weight: 500;
+    margin-bottom: 0.4rem; margin-top: 1.4rem;
+  }
+  .access-info dt:first-child { margin-top: 0; }
+  .access-info dd { font-size: 0.85rem; color: var(--text-mid); line-height: 1.85; }
+  .access-info dd a { color: var(--gold); text-decoration: none; }
+
+  .map-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border: 1.5px solid var(--gold-line);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(200,144,58,0.08);
+  }
+
+  .map-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.5);
+    padding: 3.5rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex; align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300;
+    color: var(--white); letter-spacing: 0.12em; margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.7rem; letter-spacing: 0.15em;
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+  }
+
+  .footer-info { text-align: right; font-size: 0.75rem; line-height: 2; letter-spacing: 0.05em; }
+  .footer-info a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-info a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    max-width: 960px; margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(200,144,58,0.2);
+    text-align: center; font-size: 0.68rem;
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.2);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .main-content { grid-template-columns: 1fr; gap: 2rem; }
+    .side-nav { position: static; display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--gold-line); padding-bottom: 1.5rem; }
+    .side-nav-label { width: 100%; }
+    .side-nav a { border-left: none; border-bottom: 2px solid transparent; padding: 0.3rem 0.8rem; }
+    .side-nav a.active { border-bottom-color: var(--gold); border-left: none; padding-left: 0.8rem; }
+    .message-wrap { grid-template-columns: 1fr; }
+    .message-photo { max-width: 180px; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .access-grid { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; }
+    .footer-info { text-align: left; }
+  }
+
+  @media (max-width: 500px) {
+    .history-item { grid-template-columns: 90px 1fr; gap: 1rem; }
+    .overview-table th { width: 110px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="sgi_website.html" class="logo">
+      <div class="logo-icon">SGI</div>
+      株式会社SGI
+    </a>
+    <nav>
+      <a href="company.html" class="active">企業概要</a>
+      <a href="sgi_website.html">国際貿易事業</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-orb page-hero-orb-1"></div>
+  <div class="page-hero-orb page-hero-orb-2"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="sgi_website.html">ホーム</a>
+      <span>›</span>
+      <span>企業概要</span>
+    </div>
+    <div class="page-hero-label">Company Profile</div>
+    <h1 class="page-hero-title">企業概要</h1>
+    <div class="page-hero-divider"></div>
+  </div>
+</div>
+
+<div class="main-content">
+  <aside class="side-nav">
+    <div class="side-nav-label">Contents</div>
+    <a href="#overview" class="active">会社概要</a>
+    <a href="#message">代表挨拶</a>
+    <a href="#philosophy">経営理念</a>
+    <a href="#history">沿革</a>
+    <a href="#access">アクセス</a>
+  </aside>
+
+  <div class="content-area">
+
+    <section class="content-section" id="overview">
+      <div class="content-section-header">
+        <div>
+          <div class="content-section-num">01 ── OVERVIEW</div>
+          <h2 class="content-section-title">会社概要</h2>
+          <div class="content-section-title-en">Company Profile</div>
+        </div>
+      </div>
+      <table class="overview-table">
+        <tr><th>会社名</th><td>株式会社SGI</td></tr>
+        <tr><th>英文社名</th><td>SGI CO., LTD.</td></tr>
+        <tr><th>設立</th><td>2015年4月</td></tr>
+        <tr><th>資本金</th><td>1,000万円</td></tr>
+        <tr><th>代表者</th><td>代表取締役　〇〇 〇〇</td></tr>
+        <tr><th>所在地</th><td>〒102-0083<br>東京都千代田区麹町3丁目4−3<br>シエルブルー麹町301号室</td></tr>
+        <tr><th>TEL / FAX</th><td>TEL : 03-4500-9882　／　FAX : 03-6457-0505</td></tr>
+        <tr><th>E-mail</th><td><a href="mailto:info@sg-inter.com">info@sg-inter.com</a></td></tr>
+        <tr><th>事業内容</th><td>国際貿易事業（日本酒・焼酎の輸出、化学品の輸出入）<br>飲食店コンサルティング事業</td></tr>
+        <tr><th>取引銀行</th><td>〇〇銀行　〇〇支店</td></tr>
+        <tr><th>免許・許可</th><td>酒類販売業免許</td></tr>
+      </table>
+    </section>
+
+    <section class="content-section" id="message">
+      <div class="content-section-header">
+        <div>
+          <div class="content-section-num">02 ── MESSAGE</div>
+          <h2 class="content-section-title">代表挨拶</h2>
+          <div class="content-section-title-en">Message from CEO</div>
+        </div>
+      </div>
+      <div class="message-wrap">
+        <div class="message-text">
+          <p>株式会社SGIのウェブサイトをご覧いただき、誠にありがとうございます。</p>
+          <p>当社は、日本と世界をつなぐ架け橋となるべく、2015年に設立いたしました。日本が誇る食文化、なかでも日本酒・焼酎の魅力を世界へ広く発信することを使命とし、中国をはじめとするアジア市場へ積極的に展開してまいりました。</p>
+          <p>中国国内の主要都市での飲食事業を通じて培った深い知見と現地ネットワークを活かし、蔵元から直接仕入れた高品質な日本酒を、約700店舗の和食レストランへ安定供給する体制を構築しております。</p>
+          <p>また、化学品分野においても、日本の高度な製造技術と信頼性を背景に、メタクリロニトリルの対中輸出を手掛けるなど、貿易事業の多角化にも取り組んでおります。</p>
+          <p>私たちは「誠実・品質・信頼」を経営の根幹に据え、お客様・パートナー企業・地域社会と共に成長し続けることを目指しております。今後とも株式会社SGIをどうぞよろしくお願い申し上げます。</p>
+          <div class="message-sig">
+            <div class="message-sig-title">代表取締役</div>
+            <div class="message-sig-name">〇〇　〇〇</div>
+          </div>
+        </div>
+        <div class="message-photo">
+          <div class="photo-placeholder">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+              <circle cx="26" cy="18" r="11" stroke="#c8903a" stroke-width="1.5"/>
+              <path d="M6 46 C6 34 46 34 46 46" stroke="#c8903a" stroke-width="1.5" fill="none"/>
+            </svg>
+            <div class="photo-placeholder-label">代表者写真</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="philosophy">
+      <div class="content-section-header">
+        <div>
+          <div class="content-section-num">03 ── PHILOSOPHY</div>
+          <h2 class="content-section-title">経営理念</h2>
+          <div class="content-section-title-en">Our Philosophy</div>
+        </div>
+      </div>
+      <div class="philosophy-grid">
+        <div class="philosophy-card">
+          <div class="philosophy-card-num">01</div>
+          <div class="philosophy-card-title">誠実</div>
+          <div class="philosophy-card-body">お客様・取引先・社会に対して、常に誠実かつ透明性のある事業活動を行います。信頼こそがビジネスの礎です。</div>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-card-num">02</div>
+          <div class="philosophy-card-title">品質</div>
+          <div class="philosophy-card-body">日本が誇る高品質な商品・サービスを、妥協なく世界へ届けます。品質へのこだわりが、SGIの強みです。</div>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-card-num">03</div>
+          <div class="philosophy-card-title">信頼</div>
+          <div class="philosophy-card-body">長期的なパートナーシップを大切にし、双方にとって価値ある関係を構築します。信頼の積み重ねが成長を生みます。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="history">
+      <div class="content-section-header">
+        <div>
+          <div class="content-section-num">04 ── HISTORY</div>
+          <h2 class="content-section-title">沿革</h2>
+          <div class="content-section-title-en">Company History</div>
+        </div>
+      </div>
+      <ul class="history-list">
+        <li class="history-item"><span class="history-year">2014年</span><span class="history-desc">中国・北京、上海、厦門、深圳にて和食店舗の経営およびコンサルティング事業を開始</span></li>
+        <li class="history-item"><span class="history-year">2015年4月</span><span class="history-desc">株式会社SGI設立（東京都千代田区）<br>日本酒販売免許を取得し、日本酒の対中輸出事業を開始</span></li>
+        <li class="history-item"><span class="history-year">2016年</span><span class="history-desc">天津に低温倉庫を設置し、日本酒の安定供給体制を構築<br>中国全土の和食店舗への供給ネットワークを拡大</span></li>
+        <li class="history-item"><span class="history-year">2017年</span><span class="history-desc">メタクリロニトリル（MAN）の対中輸出事業を開始<br>化学品分野へ事業領域を拡大</span></li>
+        <li class="history-item"><span class="history-year">2018年</span><span class="history-desc">上海・深圳に低温倉庫を増設<br>取引和食店舗数が500店舗を突破</span></li>
+        <li class="history-item"><span class="history-year">2019年6月</span><span class="history-desc">上海・静安寺エリアにて日本酒専門ショップ＆フードペアリングSAKEバーをオープン</span></li>
+        <li class="history-item"><span class="history-year">2022年</span><span class="history-desc">取引和食店舗数が700店舗を突破<br>東南アジア市場への展開準備を開始</span></li>
+        <li class="history-item"><span class="history-year">現在</span><span class="history-desc">北京・成都への低温倉庫設置を計画中<br>東南アジア各国への事業展開を推進</span></li>
+      </ul>
+    </section>
+
+    <section class="content-section" id="access">
+      <div class="content-section-header">
+        <div>
+          <div class="content-section-num">05 ── ACCESS</div>
+          <h2 class="content-section-title">アクセス</h2>
+          <div class="content-section-title-en">Access</div>
+        </div>
+      </div>
+      <div class="access-grid">
+        <dl class="access-info">
+          <dt>所在地</dt>
+          <dd>〒102-0083<br>東京都千代田区麹町3丁目4−3<br>シエルブルー麹町301号室</dd>
+          <dt>電話番号</dt>
+          <dd><a href="tel:0345009882">03-4500-9882</a></dd>
+          <dt>FAX</dt>
+          <dd>03-6457-0505</dd>
+          <dt>メール</dt>
+          <dd><a href="mailto:info@sg-inter.com">info@sg-inter.com</a></dd>
+          <dt>最寄り駅</dt>
+          <dd>東京メトロ有楽町線「麹町駅」徒歩3分<br>東京メトロ半蔵門線「半蔵門駅」徒歩7分<br>JR中央線「四ッ谷駅」徒歩10分</dd>
+          <dt>営業時間</dt>
+          <dd>平日 9:00〜18:00</dd>
+        </dl>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=東京都千代田区麹町3丁目4-3+シエルブルー麹町&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="株式会社SGI 所在地">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">株式会社 SGI</div>
+      <div class="footer-tagline">International Trade &amp; Consulting</div>
+    </div>
+    <div class="footer-info">
+      〒102-0083<br>東京都千代田区麹町3丁目4−3<br>シエルブルー麹町301号室<br><br>
+      TEL : <a href="tel:0345009882">03-4500-9882</a><br>
+      FAX : 03-6457-0505<br>
+      Mail : <a href="mailto:info@sg-inter.com">info@sg-inter.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">Copyright &copy; SGI CO., LTD. All Rights Reserved.</div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.content-section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  sections.forEach(el => observer.observe(el));
+
+  const sideLinks = document.querySelectorAll('.side-nav a');
+  const navSections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    navSections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    sideLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>会社概要 ｜ 株式会社クスキ・インターナショナル</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c8903a;
+    --gold-mid: #d4a050;
+    --gold-light: #e8bf7a;
+    --gold-pale: #fdf6ea;
+    --gold-line: #eed9a8;
+    --white: #ffffff;
+    --off-white: #fdfaf4;
+    --gray-bg: #faf7f0;
+    --gray-line: #ede5d0;
+    --gray-mid: #b8a888;
+    --text-dark: #1a1510;
+    --text-mid: #3a3020;
+    --text-light: #7a6a50;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Meiryo', 'メイリオ', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-dark);
+    line-height: 1.8;
+  }
+
+.vertical-number {
+  display: inline-block;
+  transform: rotate(270deg);
+  margin-right: 0.2em;
+    margin-bottom: 0.2em;
+  vertical-align: middle;
+  position: relative;
+  top: 0.1em;
+}
+#access {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem;
+  border-radius: 4px;
+}
+
+#access::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background-image: url('./access.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.5; /* 背景を薄く表示 */
+  z-index: 0;
+}
+
+#access .content-section-header,
+#access .access-grid {
+  position: relative;
+  z-index: 1;
+}
+
+#message {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem;
+}
+
+#message::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background-image: url('./greeting.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.5; /* ← 数値を下げるほど薄くなる */
+  z-index: 0;
+}
+
+#message .content-section-header,
+#message .message-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+  /* ── NAV ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 2px 24px rgba(200,144,58,0.08);
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .logo-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .logo-icon {
+    width: 52px; height: 52px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  nav { display: flex; align-items: center; }
+  nav a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 1.8rem;
+    transition: color 0.25s;
+    white-space: nowrap;
+  }
+  nav a:hover, nav a.active { color: var(--gold); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    background: none; border: none;
+    cursor: pointer; padding: 6px;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;  /* 1.5px → 3px */
+  background: var(--text-dark);
+  border-radius: 3px;
+}
+  /* .hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--text-dark);
+    transition: transform 0.3s, opacity 0.3s;
+    border-radius: 2px;
+  } */
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ── MOBILE MENU ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: calc(64px + env(safe-area-inset-top));
+    left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 8px 30px rgba(200,144,58,0.12);
+    z-index: 99;
+    flex-direction: column;
+    padding: 0.4rem 0 0.8rem;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .mobile-menu a:hover,
+  .mobile-menu a.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: var(--gold-pale);
+  }
+@media (max-width: 680px) {
+  .logo-name {
+    display: inline;
+    font-size: 0.8rem;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding-top: calc(64px + env(safe-area-inset-top));
+    position: relative;
+    overflow: hidden;
+    background: #1a1510;
+  }
+
+  .page-hero-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('./jinji.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.45;
+    z-index: 0;
+  }
+
+  .page-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      150deg,
+      rgba(15,10,5,0.55) 0%,
+      rgba(26,21,16,0.4) 50%,
+      rgba(40,28,10,0.5) 100%
+    );
+    z-index: 1;
+  }
+
+  .page-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .breadcrumb {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .breadcrumb a { color: var(--gold-light); text-decoration: none; }
+
+  .page-hero-label {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .page-hero-title {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: clamp(1.2rem, 2.625vw, 1.95rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    writing-mode: vertical-rl; /* ← ここを変更 */
+
+    text-orientation: mixed;
+    height: clamp(260px, 35vh, 400px);
+  }
+
+  .page-hero-divider {
+    width: 50px; height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    margin: 1.5rem 0 0;
+    width: 2px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+    display: grid;
+    background: var(--gray-bg)!important;;
+    grid-template-columns: 220px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .side-nav { position: sticky; top: 88px; }
+
+  .side-nav-label {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--gray-mid);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--gold-line);
+  }
+
+  .side-nav a {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    font-weight: 600; 
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.55rem 0 0.55rem 0.9rem;
+    border-left: 2px solid transparent;
+    transition: all 0.25s;
+  }
+
+  .side-nav a:hover, .side-nav a.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    padding-left: 1.2rem;
+  }
+
+  /* ── CONTENT BLOCKS ── */
+  .content-area { min-width: 0; }
+
+  .content-section {
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .content-section.visible { opacity: 1; transform: translateY(0); }
+
+  .content-section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 0;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .content-section-num {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.28em;
+    margin-bottom: 0.3rem;
+  }
+
+.content-section-title {
+  font-family: 'Meiryo', 'メイリオ', serif;
+  font-size: 700;
+  font-weight: 300;
+  color: var(--text-dark);
+  letter-spacing: 0.1em;
+}
+  .content-section-title-en {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--gray-mid);
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  /* ── OVERVIEW TABLE ── */
+  .overview-table { width: 100%; border-collapse: collapse; }
+
+  .overview-table tr { border-bottom: 1px solid var(--gold-line); transition: background 0.2s; }
+  .overview-table tr:first-child { border-top: 1px solid var(--gold-line); }
+  .overview-table tr:hover { background: var(--gold-pale); }
+
+  .overview-table th {
+    width: 180px;
+    padding: 1.1rem 1.5rem 1.1rem 0;
+    font-size: 1rem;      /* 0.78rem → 1rem */
+    font-weight: 700;     /* 太字 */
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+  .overview-table td {
+    padding: 1.1rem 0;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+    vertical-align: top;
+  }
+
+  .overview-table td a { color: var(--gold); text-decoration: none; }
+
+  /* ── MESSAGE ── */
+  .message-wrap {
+    display: block;
+  }
+
+  .message-text p {
+    font-size: 0.88rem;
+    line-height: 2.1;
+    color: var(--text-mid);
+    margin-bottom: 1.3rem;
+    text-align: justify;
+  }
+
+  .message-sig {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gold-line);
+  }
+
+  .message-sig-title { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gray-mid); margin-bottom: 0.4rem; }
+
+  .message-sig-name {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    letter-spacing: 0.1em;
+  }
+
+  .message-photo { position: relative; }
+
+
+
+  .photo-placeholder {
+    position: relative; z-index: 1;
+    width: 100%; aspect-ratio: 1/2;
+    background: linear-gradient(160deg, var(--gold-pale) 0%, #faefd8 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.8rem; border-radius: 2px;
+  }
+
+  .photo-placeholder svg { opacity: 0.3; }
+
+  .photo-placeholder-label {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--gold); font-style: italic;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .philosophy-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    padding: 2.2rem 1.8rem 2rem;
+    min-height: 320px;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    border: 1px solid var(--gold-line);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .philosophy-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.15) 0%,
+      rgba(255,255,255,0.72) 55%,
+      rgba(255,255,255,0.90) 100%
+    );
+    z-index: 0;
+  }
+
+  .philosophy-card:hover {
+    box-shadow: 0 12px 36px rgba(200,144,58,0.15);
+    transform: translateY(-4px);
+  }
+
+  .philosophy-card > * { position: relative; z-index: 1; }
+
+  .philosophy-card-1 { background-image: url('./background1.png'); }
+  .philosophy-card-2 { background-image: url('./background2.png'); }
+  .philosophy-card-3 { background-image: url('./background3.png'); }
+
+  .philosophy-card-num {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+
+  .map-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border: 1.5px solid var(--gold-line);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(200,144,58,0.08);
+  }
+
+  .map-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .philosophy-card-title {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.7rem;
+  }
+
+  .philosophy-card-body { font-size: 0.8rem; color: var(--text-mid); line-height: 1.9; padding-top: 2.0rem; }
+
+  /* ── HISTORY ── */
+  .history-list { list-style: none; }
+
+  .history-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--gold-line);
+    align-items: baseline;
+  }
+  .history-item:first-child { border-top: 1px solid var(--gold-line); }
+
+  .history-year {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 1rem; font-weight: 400;
+    color: var(--gold); letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .history-desc { font-size: 0.84rem; color: var(--text-mid); line-height: 1.85; }
+
+  /* ── ACCESS ── */
+  .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+.access-info dt {
+  font-size: 1rem;      /* 0.72rem → 1rem */
+  font-weight: 700;     /* 太字 */
+  letter-spacing: 0.08em;
+  color: var(--gold);
+
+  margin-bottom: 0.4rem;
+  margin-top: 1.4rem;
+}
+  .access-info dt:first-child { margin-top: 0; }
+  .access-info dd { font-size: 0.85rem; color: var(--text-mid); line-height: 1.85; }
+  .access-info dd a { color: var(--gold); text-decoration: none; }
+
+  .map-placeholder {
+    width: 100%; aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, #faefd8 100%);
+    border: 1.5px solid var(--gold-line);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.6rem;
+  }
+  .map-placeholder svg { opacity: 0.3; }
+  .map-placeholder-label {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.75rem; letter-spacing: 0.18em;
+    color: var(--gold); font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.5);
+    padding: 3.5rem 2rem;
+  }
+  .footer-company {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+    flex-wrap: wrap; /* 画面が狭いときだけ折り返す */
+  }
+
+  .footer-inner {
+    display: flex; align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  .image-frame { position: relative; }
+  .image-frame::before {
+    content: ''; position: absolute; top: -10px; right: -10px;
+    width: 100%; height: 100%; border: 1.5px
+  }
+  .image-placeholder {
+    position: relative; z-index: 1; width: 100%; aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, #fdf0cc 50%, #faf5e0 100%);
+    display: flex; align-items: center; justify-content: center; overflow: hidden; 
+  }
+  .image-placeholder img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .footer-info { text-align: left; font-size: 0.75rem; line-height: 2; letter-spacing: 0.05em; }
+  .footer-info a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footerfootera:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(200,144,58,0.2);
+    text-align: left; font-size: 0.68rem;
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.2);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .main-content { grid-template-columns: 1fr; gap: 2rem; }
+    .side-nav { position: static; display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--gold-line); padding-bottom: 1.5rem; }
+    .side-nav-label { width: 100%; }
+    .side-nav a { border-left: none; border-bottom: 2px solid transparent; padding: 0.15rem 0.4rem; }
+    .side-nav a.active { border-bottom-color: var(--gold); border-left: none; padding-left: 0.4rem; }
+    .message-wrap { grid-template-columns: 1fr; }
+    .message-photo { max-width: 180px; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .access-grid { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; }
+    .footer-info { text-align: left; }
+  }
+
+  @media (max-width: 500px) {
+    .history-item { grid-template-columns: 90px 1fr; gap: 1rem; }
+    .overview-table th { width: 110px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="./index.html" class="logo">
+      <img class="logo-icon" src="./logo.jpg" alt="クスキ">
+      <span class="logo-name">株式会社クスキ・インターナショナル</span>
+    </a>
+    <nav>
+      <a href="./index.html" class="active">会社概要</a>
+      <a href="./sgi_website.html">国際貿易事業</a>
+      <a href="./seizo.html">製造請負</a>
+      <a href="./gijutsu.html">技術サポート</a>
+      <a href="./contact.html">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="./index.html" class="active">会社概要</a>
+  <a href="./sgi_website.html">国際貿易事業</a>
+  <a href="./seizo.html">製造請負</a>
+  <a href="./gijutsu.html">技術サポート</a>
+  <a href="./contact.html">お問い合わせ</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-img"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner">
+    <h7 class="page-hero-title"><span class="vertical-number">5</span>年先への<br>イノベーション<br>カンパニー</h7>
+  </div>
+</div>
+
+<div class="main-content">
+  <aside class="side-nav">
+    <div class="side-nav-label">Contents</div>
+    <a href="#message">ご挨拶</a>
+    <a href="#overview" class="active">会社概要</a>
+    <a href="#philosophy">経営理念</a>
+    <a href="#access">アクセス</a>
+  </aside>
+
+  <div class="content-area">
+
+
+    <section class="content-section" id="message">
+      <div class="content-section-header">
+        <div>
+          <h2 class="content-section-title">ご挨拶</h2>
+        </div>
+      </div>
+      <div class="message-wrap">
+        <div class="message-text">
+          <p>21世紀に入り、情報通信産業の飛躍的な発展により、あらゆる産業構造が大きな変革期を迎えています。<br><br>AI技術を活用したビッグデータの普及や、IoTインフラの世界的な拡大により、5年先の私たちの暮らしやビジネス環境は、これまで想像もできないほど大きく変化していくと考えられます。<br><br>弊社は創業以来、各国の優良パートナーとの商品開発から事業提携を行い、新しい素材開発によって製品価値を向上させ、新しい技術応用によってマーケット変革ニーズへ のソリューションを提供し続けております。 同時に従来の素材・中古設備等を製品としての寿命（価値）ができるだけ長くなるように、長年培ってきたグローバルネットワークを活用し、海外ユーザー様のニーズに合わせて、セールスプロモーションも鋭意対応しております。<br><br>「５年先へのイノベーション」をミッションとして、いかに未来へ貢献できるのかを常に考え、社員一同で日々を精進し、挑戦し続けたいと思います。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="overview">
+      <div class="content-section-header">
+        <div>
+          <h2 class="content-section-title">会社概要</h2>
+        </div>
+      </div>
+      <table class="overview-table">
+        <tr><th>会社名</th><td>株式会社クスキ・インターナショナル<br> Kusuki International Co.,Ltd.</td></tr>
+        <tr><th>設立</th><td>2016年11月1日</td></tr>
+        <tr><th>資本金</th><td>1,000万円</td></tr>
+        <tr><th>代表者</th><td>代表取締役　許　楠</td></tr>
+        <tr><th>従業員数</th><td>10名</td></tr>
+        <tr><th>本社</th><td>〒104-0061<br>東京都中央区銀座8-12-5　峯田ビル5階<br>TEL : 03-6264-7166</td></tr>
+        <tr><th>取引先</th><td>シャープ株式会社<br>シャープディスプレイテクノロジー株式会社<br>株式会社クレハ<br>京セラ株式会社<br>恵和株式会社</td></tr>
+        <tr><th>取引銀行</th><td>三井住友銀行　六本木支店<br>三菱UFJ銀行　六本木支店</td></tr>
+        <tr><th>事業内容</th><td>化学工業薬品原料の輸出入<br>液晶・半導体製造設備・素材の輸出入<br>三国間貿易<br>中国ビジネスコンサルタント</td></tr>
+      </table>
+    </section>
+
+    <section class="content-section" id="philosophy">
+      <div class="content-section-header">
+        <div>
+          <h2 class="content-section-title">経営理念</h2>
+        </div>
+      </div>
+      <div class="philosophy-grid">
+        <div class="philosophy-card philosophy-card-1">
+          <div class="philosophy-card-num">01</div>
+          <div class="philosophy-card-title">価値をつなぐ</div>
+          <div class="philosophy-card-body">時代の変化を的確に捉え、国や地域を越えたネットワークを活かし、優れた製品・素材・技術をお客様へお届けします。</div>
+        </div>
+        <div class="philosophy-card philosophy-card-2">
+          <div class="philosophy-card-num">02</div>
+          <div class="philosophy-card-title">市場をひらく</div>
+          <div class="philosophy-card-body">各国の優良パートナーとの連携により、新素材、電子部品、産業設備、製造支援など幅広い分野で最適なソリューションを提案します。</div>
+        </div>
+        <div class="philosophy-card philosophy-card-3">
+          <div class="philosophy-card-num">03</div>
+          <div class="philosophy-card-title">未来へ貢献</div>
+          <div class="philosophy-card-body">素材や設備が持つ価値を最大限に活かし、産業の発展と持続可能な社会づくりに貢献します。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="content-section" id="history">
+      <div class="content-section-header">
+        <div>
+          <div class="content-section-num">04 ── HISTORY</div>
+          <h2 class="content-section-title">沿革</h2>
+          <div class="content-section-title-en">Company History</div>
+        </div>
+      </div>
+      <ul class="history-list">
+        <li class="history-item"><span class="history-year">2014年</span><span class="history-desc">中国・北京、上海、厦門、深圳にて和食店舗の経営およびコンサルティング事業を開始</span></li>
+        <li class="history-item"><span class="history-year">2015年4月</span><span class="history-desc">株式会社クスキ・インターナショナル設立（東京都千代田区）<br>日本酒販売免許を取得し、日本酒の対中輸出事業を開始</span></li>
+        <li class="history-item"><span class="history-year">2016年</span><span class="history-desc">天津に低温倉庫を設置し、日本酒の安定供給体制を構築<br>中国全土の和食店舗への供給ネットワークを拡大</span></li>
+        <li class="history-item"><span class="history-year">2017年</span><span class="history-desc">メタクリロニトリル（MAN）の対中輸出事業を開始<br>化学品分野へ事業領域を拡大</span></li>
+        <li class="history-item"><span class="history-year">2018年</span><span class="history-desc">上海・深圳に低温倉庫を増設<br>取引和食店舗数が500店舗を突破</span></li>
+        <li class="history-item"><span class="history-year">2019年6月</span><span class="history-desc">上海・静安寺エリアにて日本酒専門ショップ＆フードペアリングSAKEバーをオープン</span></li>
+        <li class="history-item"><span class="history-year">2022年</span><span class="history-desc">取引和食店舗数が700店舗を突破<br>東南アジア市場への展開準備を開始</span></li>
+        <li class="history-item"><span class="history-year">現在</span><span class="history-desc">北京・成都への低温倉庫設置を計画中<br>東南アジア各国への事業展開を推進</span></li>
+      </ul>
+    </section> -->
+
+    <section class="content-section" id="access">
+      <div class="content-section-header">
+        <div>
+          <h2 class="content-section-title">アクセス</h2>
+        </div>
+      </div>
+      <div class="access-grid">
+        <dl class="access-info">
+          <dt>所在地</dt>
+          <dd>〒104-0061<br>東京都中央区銀座8-12-5<br>峯田ビル5階</dd>
+          <dt>電話番号</dt>
+          <dd>03-6264-7166</dd>
+          <dt>メール</dt>
+          <dd>info@kinter.co.jp</dd>
+          <dt>最寄り駅</dt>
+          <dd>新橋駅徒歩5分<br>有楽町駅徒歩6分<br>銀座駅徒歩8分</dd>
+          <dt>営業時間</dt>
+          <dd>平日 9:30〜18:00</dd>
+        </dl>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=東京都中央区銀座8-12-5&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="株式会社クスキ・インターナショナル 所在地">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner" >
+    <div class="footer-company">
+        <div class="footer-logo">株式会社クスキ・インターナショナル</div>
+        <div class="footer-info">
+        〒104-0061 東京都中央区銀座8-12-5　峯田ビル5階<br>
+        TEL : <a href="tel:0362647166">03-6264-7166</a>&nbsp;&nbsp;&nbsp;&nbsp;Mail : <a href="mailto:info@kinter.co.jp">info@kinter.co.jp</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">Copyright &copy; Kusuki International CO., LTD. All Rights Reserved.</div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.content-section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  sections.forEach(el => observer.observe(el));
+
+  const sideLinks = document.querySelectorAll('.side-nav a');
+  const navSections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    navSections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    sideLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+
+  // ── Hamburger ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  }
+</script>
+</body>
+</html>

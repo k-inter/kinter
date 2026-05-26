@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>国際貿易事業 ｜ 株式会社クスキ・インターナショナル</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold:        #c8973a;
+    --gold-light:  #e0b45a;
+    --gold-pale:   #fdf6e8;
+    --gold-line:   #e8d09a;
+    --white:       #ffffff;
+    --off-white:   #fdfaf4;
+    --gray-bg:     #faf7f0;
+    --gray-line:   #ecdfc0;
+    --gray-mid:    #c0a870;
+    --text-dark:   #2a1f0a;
+    --text-mid:    #4a3a1a;
+    --text-light:  #8a7a5a;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Meiryo', 'メイリオ', 'Hiragino Kaku Gothic ProN', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.8; }
+
+  /* ── NAV ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 2px 24px rgba(200,144,58,0.08);
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+@media (max-width: 680px) {
+  .logo-name {
+    display: inline;
+    font-size: 0.8rem;
+  }
+}
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .logo-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .logo-icon {
+    width: 34px; height: 34px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  nav { display: flex; align-items: center; }
+  nav a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 1.8rem;
+    transition: color 0.25s;
+    white-space: nowrap;
+  }
+  nav a:hover, nav a.active { color: var(--gold); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    background: none; border: none;
+    cursor: pointer; padding: 6px;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--text-dark);
+    transition: transform 0.3s, opacity 0.3s;
+    border-radius: 2px;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ── MOBILE MENU ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: calc(64px + env(safe-area-inset-top));
+    left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 8px 30px rgba(200,144,58,0.12);
+    z-index: 99;
+    flex-direction: column;
+    padding: 0.4rem 0 0.8rem;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .mobile-menu a:hover,
+  .mobile-menu a.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: var(--gold-pale);
+  }
+
+  @media (max-width: 680px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+    .page-hero { padding-top: calc(64px + env(safe-area-inset-top)); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100vh; min-height: 600px;
+    background: linear-gradient(155deg, #fffdf5 0%, #fdf8ec 45%, #faf4e0 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding-top: calc(68px + env(safe-area-inset-top));
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(200,151,58,0.06) 0px, rgba(200,151,58,0.06) 1px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(90deg, rgba(200,151,58,0.06) 0px, rgba(200,151,58,0.06) 1px, transparent 1px, transparent 80px);
+  }
+  .hero-orb {
+    position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none;
+  }
+  .hero-orb-1 { width: 520px; height: 520px; background: rgba(200,151,58,0.12); top: -120px; right: -80px; }
+  .hero-orb-2 { width: 320px; height: 320px; background: rgba(224,180,90,0.10); bottom: -60px; left: 5%; }
+
+  .hero-content { text-align: center; position: relative; z-index: 2; padding: 0 2rem; }
+
+  .hero-label {
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: 0.85rem; letter-spacing: 0.38em;
+    color: var(--gold-light); text-transform: uppercase; margin-bottom: 1.2rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 300; color: var(--text-dark); line-height: 1.4; letter-spacing: 0.12em;
+    margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .hero-subtitle {
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: clamp(1rem, 2.5vw, 1.6rem);
+    font-weight: 300; font-style: italic; color: var(--gray-mid);
+    letter-spacing: 0.18em; margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+    .content-text h4 { font-size: 1rem; letter-spacing: 0.06em; color: var(--text-dark); margin-top: 1.4rem; margin-bottom: 0.35rem; font-weight: 800; border-left: 3px solid var(--gold); padding-left: 0.7rem; }
+  .hero-divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    margin: 0 auto 2rem; border-radius: 2px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+  .hero-desc {
+    font-size: 0.85rem; color: var(--text-light); letter-spacing: 0.06em;
+    line-height: 2; max-width: 480px; margin: 0 auto;
+    opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .anchor-tabs {
+    display: flex; justify-content: center; gap: 0.8rem; margin-top: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+  .anchor-tab {
+    padding: 0.65rem 2rem; border: 1.5px solid var(--gold);
+    color: var(--gold); font-size: 0.78rem; letter-spacing: 0.15em;
+    text-decoration: none; transition: all 0.3s; background: transparent; border-radius: 1px;
+  }
+  .anchor-tab:hover { background: var(--gold); color: var(--white); }
+
+  /* ── SECTIONS ── */
+  .section { padding: 100px 2rem; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-header { margin-bottom: 0.5rem; display: flex; align-items: flex-end; gap: 2rem; }
+  .section-num { font-family: 'Meiryo', 'メイリオ', serif; font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.3em; margin-bottom: 0.5rem; }
+  .section-title {
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+  }
+  .section-title-en { font-family: 'Meiryo', 'メイリオ', serif; font-size: clamp(0.95rem, 1.5vw, 1.15rem); font-weight: 300; font-style: italic; color: var(--gray-mid); letter-spacing: 0.12em; margin-top: 0.3rem; }
+  .section-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--gold-line), transparent); margin-bottom: 0.5rem; }
+
+  /* ── SAKE ── */
+  #sake { background: var(--white); }
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .content-text p { font-size: 0.88rem; line-height: 2; color: var(--text-mid); margin-bottom: 1.2rem; text-align: justify; }
+
+  .image-frame { position: relative; }
+  .image-frame::before {
+    content: ''; position: absolute; top: -10px; right: -10px;
+    width: 100%; height: 100%; border: 1.5px
+  }
+  .image-placeholder {
+    position: relative; z-index: 1; width: 100%; aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, #fdf0cc 50%, #faf5e0 100%);
+    display: flex; align-items: center; justify-content: center; overflow: hidden; 
+  }
+  .image-placeholder img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .image-label {
+    position: absolute; bottom: 1rem; left: 1rem;
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: 0.75rem;
+    letter-spacing: 0.2em; color: var(--gold-light); text-transform: uppercase; font-style: italic;
+  }
+
+  .partners-section { margin-top: 3rem; padding-top: 2.5rem; border-top: 1.5px solid var(--gold-line); }
+  .partners-label { font-size: 0.72rem; letter-spacing: 0.22em; color: var(--gold); margin-bottom: 1.2rem; font-family: 'Meiryo', 'メイリオ', serif; }
+  .partners-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .partner-item {
+    padding: 0.6rem 0; font-size: 0.78rem; color: var(--text-mid);
+    border-bottom: 1px solid var(--gold-line); letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .partner-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold-light); flex-shrink: 0; opacity: 0.7; }
+
+    #mechanic { background: var(--gray-bg); }
+        #cutting { background: var(--gray-bg); }
+  /* ── CHEMICAL ── */
+  #chemical { background: var(--gray-bg); }
+  .chemical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .chemical-visual {
+    background: var(--white); border: 1.5px solid var(--gold-line); padding: 3rem;
+    position: relative; overflow: hidden; border-radius: 1px;
+    box-shadow: 0 4px 30px rgba(200,151,58,0.08);
+  }
+  .chemical-visual::before {
+    content: 'MAN'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: 8rem; font-weight: 300;
+    color: rgba(200,151,58,0.07); letter-spacing: 0.2em; white-space: nowrap;
+  }
+  .chem-info { position: relative; z-index: 1; }
+  .chem-name { font-family: 'Meiryo', 'メイリオ', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.4rem; }
+  .chem-abbr { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gray-mid); margin-bottom: 2rem; font-family: 'Meiryo', 'メイリオ', serif; }
+  .chem-property { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gold-line); }
+  .chem-prop-label { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); min-width: 80px; padding-top: 0.1rem; font-weight: 500; }
+  .chem-prop-value { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.5);
+    padding: 3.5rem 2rem;
+  }
+  .footer-company {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+    flex-wrap: wrap; /* 画面が狭いときだけ折り返す */
+  }
+
+  .footer-inner {
+    display: flex; align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-family: 'Meiryo', 'メイリオ', serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  .image-frame { position: relative; }
+  .image-frame::before {
+    content: ''; position: absolute; top: -10px; right: -10px;
+    width: 100%; height: 100%; border: 1.5px
+  }
+  .footer-info { text-align: left; font-size: 0.75rem; line-height: 2; letter-spacing: 0.05em; }
+  .footer-info a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footerfootera:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(200,144,58,0.2);
+    text-align: left; font-size: 0.68rem;
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.2);
+  }
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 700px) {
+    .content-grid, .chemical-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .section-line { display: none; }
+    .footer-inner { flex-direction: column; }
+    .footer-info { text-align: left; }
+  }
+
+  /* ── HAMBURGER & MOBILE MENU ── */
+  .logo-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    background: none; border: none;
+    cursor: pointer; padding: 6px;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--text-dark);
+    transition: transform 0.3s, opacity 0.3s;
+    border-radius: 2px;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: calc(68px + env(safe-area-inset-top));
+    left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 8px 30px rgba(200,151,58,0.12);
+    z-index: 99;
+    flex-direction: column;
+    padding: 0.4rem 0 0.8rem;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .mobile-menu a:hover,
+  .mobile-menu a.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: var(--gold-pale);
+  }
+
+  @media (max-width: 680px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+    .section { padding: 60px 1.2rem; }
+    .content-grid, .chemical-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    height: 50vh; min-height: 320px;
+    background: #f5f0e8;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding-top: calc(68px + env(safe-area-inset-top));
+  }
+  .hero-bg-img {
+    position: absolute; inset: 0;
+    background-image: url('./banner1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.45;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(10,8,3,0.60) 0%,
+      rgba(20,14,4,0.45) 50%,
+      rgba(30,20,5,0.55) 100%
+    );
+    z-index: 1;
+  }
+  .hero-content { text-align: center; position: relative; z-index: 2; padding: 0 2rem; }
+  .hero-label {
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: 0.85rem; letter-spacing: 0.38em;
+    color: var(--gold-light); text-transform: uppercase; margin-bottom: 0.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 300; color: rgba(255,255,255,0.92); line-height: 1.4; letter-spacing: 0.12em;
+    margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .hero-subtitle {
+    font-family: 'Meiryo', 'メイリオ', serif; font-size: clamp(1rem, 2.5vw, 1.6rem);
+    font-weight: 300; font-style: italic; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.18em; margin-bottom: 0.8rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+  .hero-divider {
+    width: 60px; height: 1.5px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    margin: 0 auto 0.8rem; border-radius: 2px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .seizo-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="./company.htm" class="logo">
+    <img class="logo-icon" src="./logo.jpg" alt="クスキ">
+      <span class="logo-name">株式会社クスキ・インターナショナル</span>
+    </a>
+    <nav>
+      <a href="./index.html">企業概要</a>
+      <a href="./sgi_website.html">国際貿易事業</a>
+      <a href="./seizo.html" class="active">製造請負</a>
+      <a href="./gijutsu.html">技術サポート</a>
+      <a href="./contact.html">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="./index.html">企業概要</a>
+  <a href="./sgi_website.html">国際貿易事業</a>
+  <a href="./seizo.html" class="active">製造請負</a>
+  <a href="./gijutsu.html">技術サポート</a>
+  <a href="./contact.html">お問い合わせ</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label">Manufacturing Services</div>
+    <h1 class="hero-title">製造請負</h1>
+    <p class="hero-subtitle">Quality Manufacturing Solutions</p>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+
+<section class="section" id="chemical">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-title-wrap">
+        <h2 class="section-title">製造請負</h2>
+        <div class="section-title-en">Manufacturing Services</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+    <div class="section-header">
+      <div class="content-text reveal">
+        <p>お客様との信頼関係を構築し、生産工程の最適化、人員不足のフォローなどの事業展開を行います。<br>大手企業様での製造請負・業務委託で御評価いただいた実績を持つ弊社は、部品の組立、製品検査、梱包保管までのお客様の様々なご要望にお応えします。<br>お客様のご要望を実現するために、生産改善、生産管理のプロが現場をサポートさせていただきます。</p>
+      </div>
+    </div>
+
+    <div class="seizo-layout">
+      <div class="content-text reveal" style="width:100%;">
+        <h4>検査・検収業務</h4>
+        <p>品質検査には、認定資格を有したスキルの高い検査員が対応し、お客様の品質維持にお役にたちます。<br>検査で得たデータを的確適時ご報告し品質向上のお役に立ちます。</p>
+        <div class="image-frame reveal" style="margin: 1.2rem 0;">
+          <div class="image-placeholder">
+            <img src="./seizon2.jpg" alt="製造請負">
+          </div>
+        </div>
+        <h4>製造請負業務</h4>
+        <p>お客様の製造業務の一部、または全部をお客様の社員様に代わって、弊社の社員が行います。<br>お客様の製造ラインをお任せいただくことで、製造部門におけるさまざまな業務を管理し、柔軟な生産体制を構築し、効率化した製造業務をご提供致します。<br>ものづくりは、「品質向上」［コスト削減」［納期遵守」に加えてコンプライアンスが重要と考えています。<br>貴社との協力体制の中で、法令に準じて適正に業務を遂行できるように致します。</p>
+      </div>
+      <div class="image-frame reveal" style="margin-top: 2rem;">
+        <div class="image-placeholder">
+          <img src="./seizon.jpg" alt="製造請負">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner" >
+    <div class="footer-company">
+        <div class="footer-logo">株式会社クスキ・インターナショナル</div>
+        <div class="footer-info">
+        〒104-0061 東京都中央区銀座8-12-5　峯田ビル5階<br>
+        TEL : <a href="tel:0362647166">03-6264-7166</a>&nbsp;&nbsp;&nbsp;&nbsp;Mail : <a href="mailto:info@kinter.co.jp">info@kinter.co.jp</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">Copyright &copy; Kusuki International CO., LTD. All Rights Reserved.</div>
+</footer>
+
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  });
+
+  // ── Hamburger ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  }
+</script>
+</body>
+</html>
